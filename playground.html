@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tic-Tac-Toe | Playground</title>
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/paper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/playground.js"></script>
+    <script src="js/popover.js"></script>
+    <script src="https://kit.fontawesome.com/9f37ddf547.js"></script>
+    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+    <script src="js/chat.js"></script>
+</head>
+
+<body>
+    <center>
+        <article class="article">
+            <h1 class="article-title" onclick="localStorage.clear(); window.location.replace('index.html')">Tic-Tac-Toe</h1>
+            <p class="text-lead" id="room_code"></p>
+            <div class="row flex-spaces tabs" id="players"></div>
+    </center>
+    <table>
+        <tr>
+            <td class="border-dashed border" id="0">
+                <table>
+                    <tr>
+                        <td data-position="0,0" class="child"></td>
+                        <td data-position="0,1" class="child"></td>
+                        <td data-position="0,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="0,3" class="child"></td>
+                        <td data-position="0,4" class="child"></td>
+                        <td data-position="0,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="0,6" class="child"></td>
+                        <td data-position="0,7" class="child"></td>
+                        <td data-position="0,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="1">
+                <table>
+                    <tr>
+                        <td data-position="1,0" class="child"></td>
+                        <td data-position="1,1" class="child"></td>
+                        <td data-position="1,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="1,3" class="child"></td>
+                        <td data-position="1,4" class="child"></td>
+                        <td data-position="1,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="1,6" class="child"></td>
+                        <td data-position="1,7" class="child"></td>
+                        <td data-position="1,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="2">
+                <table>
+                    <tr>
+                        <td data-position="2,0" class="child"></td>
+                        <td data-position="2,1" class="child"></td>
+                        <td data-position="2,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="2,3" class="child"></td>
+                        <td data-position="2,4" class="child"></td>
+                        <td data-position="2,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="2,6" class="child"></td>
+                        <td data-position="2,7" class="child"></td>
+                        <td data-position="2,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="border-dashed border" id="3">
+                <table>
+                    <tr>
+                        <td data-position="3,0" class="child"></td>
+                        <td data-position="3,1" class="child"></td>
+                        <td data-position="3,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="3,3" class="child"></td>
+                        <td data-position="3,4" class="child"></td>
+                        <td data-position="3,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="0,6" class="child"></td>
+                        <td data-position="3,7" class="child"></td>
+                        <td data-position="3,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="4">
+                <table>
+                    <tr>
+                        <td data-position="4,0" class="child"></td>
+                        <td data-position="4,1" class="child"></td>
+                        <td data-position="4,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="4,3" class="child"></td>
+                        <td data-position="4,4" class="child"></td>
+                        <td data-position="4,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="4,6" class="child"></td>
+                        <td data-position="4,7" class="child"></td>
+                        <td data-position="4,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="5">
+                <table>
+                    <tr>
+                        <td data-position="5,0" class="child"></td>
+                        <td data-position="5,1" class="child"></td>
+                        <td data-position="5,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="5,3" class="child"></td>
+                        <td data-position="5,4" class="child"></td>
+                        <td data-position="5,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="5,6" class="child"></td>
+                        <td data-position="5,7" class="child"></td>
+                        <td data-position="5,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="border-dashed border" id="6">
+                <table>
+                    <tr>
+                        <td data-position="6,0" class="child"></td>
+                        <td data-position="6,1" class="child"></td>
+                        <td data-position="6,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="6,3" class="child"></td>
+                        <td data-position="6,4" class="child"></td>
+                        <td data-position="6,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="6,6" class="child"></td>
+                        <td data-position="6,7" class="child"></td>
+                        <td data-position="6,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="7">
+                <table>
+                    <tr>
+                        <td data-position="7,0" class="child"></td>
+                        <td data-position="7,1" class="child"></td>
+                        <td data-position="7,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="7,3" class="child"></td>
+                        <td data-position="7,4" class="child"></td>
+                        <td data-position="7,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="7,6" class="child"></td>
+                        <td data-position="7,7" class="child"></td>
+                        <td data-position="7,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+            <td class="border-dashed border" id="8">
+                <table>
+                    <tr>
+                        <td data-position="8,0" class="child"></td>
+                        <td data-position="8,1" class="child"></td>
+                        <td data-position="8,2" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="8,3" class="child"></td>
+                        <td data-position="8,4" class="child"></td>
+                        <td data-position="8,5" class="child"></td>
+                    </tr>
+                    <tr>
+                        <td data-position="8,6" class="child"></td>
+                        <td data-position="8,7" class="child"></td>
+                        <td data-position="8,8" class="child"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <label class="paper-btn margin modal" for="modal-1" id="pop" style="display: none;"></label>
+    <input class="modal-state" id="modal-1" type="checkbox">
+    <div class="modal">
+        <label class="modal-bg" for="modal-1"></label>
+        <div class="modal-body">
+            <label class="btn-close endgame" for="modal-1">X</label>
+            <h4 class="modal-title">Modal Title</h4>
+            <h5 class="modal-subtitle">Modal Subtitle</h5>
+            <p class="modal-text">This is an example of modal which is implemented with pure CSS! :D</p>
+            <label for="modal-1" class="border" onclick="end()">Okk!</label>
+        </div>
+    </div>
+    <input class="modal-state" id="modal-2" type="checkbox">
+    <div class="modal">
+        <label class="modal-bg" for="modal-2"></label>
+        <div class="modal-body chatBox">
+            <label class="btn-close" for="modal-2">X</label>
+            <h4 class="modal-title">Chats</h4>
+            <div class="chats"></div>
+            <div class="form-group send-msg">
+                <input type="text" placeholder="Enter Messege" id="paperInputs1">
+                <button onclick="send()"><i class="far fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
