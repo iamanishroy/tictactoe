@@ -5,7 +5,7 @@ $(document).ready(function () {
         cluster: 'ap2'
     });
     var channel = pusher.subscribe('my-channel');
-    channel.bind(localStorage.getItem('roomId'), function (data) {
+    channel.bind("ttt-" + localStorage.getItem('roomId'), function (data) {
         $('.chats').append(`<div class="card"><div class="card-body"><h5 class="card-subtitle">${data.user}</h5>
         <p class="card-text">${data.msg}</p></div></div>`);
     });
@@ -14,7 +14,7 @@ function send() {
     $.ajax({
         url: "https://gossipx-server-1.ml/pusher/bingo-pusher.php",
         type: "POST",
-        data: { room: localStorage.getItem('roomId'), user: mgsName, msg: $('#paperInputs1').val().trim() },
+        data: { room: "ttt-" + localStorage.getItem('roomId'), user: mgsName, msg: $('#paperInputs1').val().trim() },
         success: function (data) {
             $('#paperInputs1').val('');
         }

@@ -42,7 +42,6 @@ $(document).ready(function () {
                     }
                 }
                 check(snap.markedMaize);
-                $('#' + activeBox).removeClass('border').addClass('border-secondary', ' border-thick');
             }
             current = snap.current;
             if (Object.keys(snap).includes('checked')) {
@@ -71,20 +70,18 @@ $(document).ready(function () {
                     declareOnce = false;
                     pop('Yo..Ho..!!', '', `${(win == 'X') ? snap.player : snap.host} won the Ultimate Match!!`);
                 }
+                activeBox = (markedBox[activeBox] == 'N') ? activeBox : 9;
             }
+            $('#' + activeBox).removeClass('border').addClass('border-secondary', ' border-thick');
         }
     });
     $(document).on('click', '.child', function () {
         pos = $(this).attr("data-position").split(',');
-        if (current == name && (maize[pos[0]][pos[1]] && (activeBox == 9 || activeBox == pos[0])) && markedBox[pos[1]] == 'N') {
+        if (current == name && (maize[pos[0]][pos[1]] && (activeBox == 9 || activeBox == pos[0])) && markedBox[pos[0]] == 'N') {
             $('.border-dashed').removeClass('border-secondary', 'border-thick').addClass('border');
             marker = (snap.host == name) ? 'O' : 'X';
             $(this).text(marker);
-            if (markedBox[pos[1]] == 'N') {
-                activeBox = pos[1];
-            } else {
-                activeBox = 9;
-            }
+            activeBox = (markedBox[pos[1]] == 'N') ? pos[1] : 9;
             maize[pos[0]][pos[1]] = false;
             markedMaize[pos[0]][pos[1]] = marker;
             firebase.database().ref(`rooms/${localStorage.getItem('roomId')}/`).update({
