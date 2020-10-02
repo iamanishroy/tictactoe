@@ -69,6 +69,8 @@ $(document).ready(function () {
                 if (declareOnce && win != 'N') {
                     declareOnce = false;
                     pop('Yo..Ho..!!', '', `${(win == 'X') ? snap.player : snap.host} won the Ultimate Match!!`);
+                } else if (snap.checked.markedBox[0] != 'N' && snap.checked.markedBox[1] != 'N' && snap.checked.markedBox[2] != 'N' && snap.checked.markedBox[3] != 'N' && snap.checked.markedBox[4] != 'N' && snap.checked.markedBox[5] != 'N' && snap.checked.markedBox[6] != 'N' && snap.checked.markedBox[7] != 'N' && snap.checked.markedBox[8] != 'N') {
+                    pop('Yo..Yo..!!', '', `Draw Match!!`);
                 }
                 activeBox = (markedBox[activeBox] == 'N') ? activeBox : 9;
             }
