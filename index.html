@@ -30,15 +30,15 @@
                 placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
             </p>
             <br><br>
-            <button onclick="startGameDisplay()">Start Ultimate Match</button>
-            <button>Start Standard Match</button>
+            <button onclick="startGameDisplay(1)">Start Ultimate Match</button>
+            <button onclick="startGameDisplay(2)">Start Standard Match</button>
             <div class="col-12 col">
                 <button class="btn-block" onclick="joinGameDisplay()">Join</button>
             </div>
         </article>
     </center>
     <center id="start" class="intro" style="display: none;">
-        <h2 class="article-title" onclick="localStorage.clear(); window.location.replace('index.html')">Tic-Tac-Toe</h2>
+        <h2 class="article-title" onclick="returntype(); localStorage.clear(); window.location.replace('index.html')">Tic-Tac-Toe</h2>
         <div class="col sm-8">
             <p class="text-lead">Enter your Name</p>
             <div class="form-group">

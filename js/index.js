@@ -1,8 +1,15 @@
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var type = 0;
 var snap;
-function startGameDisplay() {
-    $('.intro').hide();
-    $('#start').show();
+function returntype() {
+    type = 0;
+}
+function startGameDisplay(ty) {
+    if (ty === 1 || ty === 2) {
+        type = ty;
+        $('.intro').hide();
+        $('#start').show();
+    }
 }
 function joinGameDisplay() {
     $('.intro').hide();
@@ -16,30 +23,45 @@ function checkNameAndCreateUltimate() {
         for (var i = 0; i < 6; i++) result += characters.charAt(Math.floor(Math.random() * charactersLength));
         firebase.database().ref('rooms/' + result).once('value', function (snapshot) {
             if (!snapshot.val()) {
-                firebase.database().ref('rooms/' + result).set({
-                    roomId: result,
-                    type: 0,
-                    host: $('#paperInputs1').val().trim(),
-                    start: false,
-                    maize: [
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true],
+                if (type === 1) {
+                    firebase.database().ref('rooms/' + result).set({
+                        roomId: result,
+                        type: 1,
+                        host: $('#paperInputs1').val().trim(),
+                        start: false,
+                        maize: [
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
 
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
 
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true],
-                        [true, true, true, true, true, true, true, true, true]
-                    ]
-                }).then(() => {
-                    localStorage.clear();
-                    localStorage.setItem('name', $('#paperInputs1').val().trim());
-                    localStorage.setItem('roomId', result);
-                    window.location.replace('wait.html');
-                });
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true],
+                            [true, true, true, true, true, true, true, true, true]
+                        ]
+                    }).then(() => {
+                        localStorage.clear();
+                        localStorage.setItem('name', $('#paperInputs1').val().trim());
+                        localStorage.setItem('roomId', result);
+                        window.location.replace('wait.html');
+                    });
+                } else if (type === 2) {
+                    firebase.database().ref('rooms/' + result).set({
+                        roomId: result,
+                        type: 2,
+                        host: $('#paperInputs1').val().trim(),
+                        start: false,
+                        maize: ['N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N']
+                    }).then(() => {
+                        localStorage.clear();
+                        localStorage.setItem('name', $('#paperInputs1').val().trim());
+                        localStorage.setItem('roomId', result);
+                        window.location.replace('wait.html');
+                    });
+                }
             } else {
                 checkNameAndCreateUltimate();
             }
@@ -55,11 +77,11 @@ function checkRoomAndEnter() {
             if (snapshot.val()) {
                 snap = snapshot.toJSON();
                 localStorage.clear();
-                if (!Object.keys(snap).includes('player')){
+                if (!Object.keys(snap).includes('player')) {
                     localStorage.setItem('roomId', $('#paperInputs2').val().trim().replace('-', '').toUpperCase());
                     $('#enter_room').hide();
                     $('#enter_name').show();
-                }else{
+                } else {
                     pop('Sorry!!', '', 'House is already full!!');
                 }
             } else {

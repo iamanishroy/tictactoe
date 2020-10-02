@@ -1,6 +1,10 @@
 firebase.database().ref(`rooms/${localStorage.getItem('roomId')}`).on('value', function (snapshot) {
     if (snapshot.val()['start']) {
-        location.replace('playground.html');
+        if (snapshot.val()['type'] == 1) {
+            location.replace('playground.html');
+        } else {
+            location.replace('play-ground.html');
+        }
     }
     $('.flex-spaces').html('<div class="alert alert-primary">' + snapshot.val()['host'] + '</div>');
     snap = Object.keys(snapshot.toJSON());
@@ -16,7 +20,7 @@ firebase.database().ref(`rooms/${localStorage.getItem('roomId')}`).on('value', f
 function room() {
     var room = localStorage.getItem('roomId').substr(0, 3) + '-' + localStorage.getItem('roomId').substr(3, 6);
     $('#room_code').html(`${room}&nbsp;&nbsp;<span class="badge success"><label for="modal-2"><i class="far fa-comment-dots"></i></label></span>`);
-    $('#share').attr('href', `whatsapp://send?text=Play Ultimate Tic-Tac-Toe game with me by clicking on the link https://tictactoe.oldskool.ml/?room=${room} or By the code *${room}*`);
+    $('#share').attr('href', `whatsapp://send?text=Play Tic-Tac-Toe game with me by clicking on the link https://tictactoe.oldskool.ml/?room=${room} or By the code *${room}*`);
 } function copyToClipboard() {
     var $temp = $("<input>");
     $("body").append($temp);

@@ -60,6 +60,18 @@ article .text-lead {
 	min-width: 7vw;
 	max-width: 7vw;
 }
+.standard-table{
+	width: 80vw;
+	margin: auto;
+}
+.normal-child{
+	border-right: 3px solid #caced1;
+	border-bottom: 3px solid #caced1;
+	height: 25vw;
+	width: 26vw;
+	font-size: 2rem;
+    text-align: center;
+}
 @media only screen and (min-width: 600px) {
 	.intro {
 		margin-top: 0;
