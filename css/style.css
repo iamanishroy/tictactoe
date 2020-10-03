@@ -51,7 +51,10 @@ article .text-lead {
 .border-dashed {
 	height: 33vw;
 }
-
+table {
+	margin: auto;
+	width: 0;
+}
 .child {
 	border-right: 1px solid #caced1;
 	border-bottom: 1px solid #caced1;
@@ -82,6 +85,9 @@ article .text-lead {
 	td {
 		height: calc(20/100 * 30vw);
 	}
+	#players{
+		font-size: 2rem;
+	}
 	.res-btn{
 		max-width: 50%;
 	}
@@ -90,5 +96,23 @@ article .text-lead {
 	}
 	.intro .para{
 		margin: 0 30% 0 30%;
+	}
+	.border-dashed {
+		height: 10vw;
+	}
+	.child {
+	    height: 3vw;
+    	min-width: 3vw;
+    	font-size: 2rem;
+    	max-width: 3vw;
+    	text-align: center;
+	}
+	.standard-table {
+		width: 30vw;
+	}
+	.normal-child {
+		height: 10vw;
+		font-size: 3rem;
+    	line-height: 8vw;
 	}
 }

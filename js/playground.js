@@ -69,7 +69,8 @@ $(document).ready(function () {
                 if (declareOnce && win != 'N') {
                     declareOnce = false;
                     pop('Yo..Ho..!!', '', `${(win == 'X') ? snap.player : snap.host} won the Ultimate Match!!`);
-                } else if (snap.checked.markedBox[0] != 'N' && snap.checked.markedBox[1] != 'N' && snap.checked.markedBox[2] != 'N' && snap.checked.markedBox[3] != 'N' && snap.checked.markedBox[4] != 'N' && snap.checked.markedBox[5] != 'N' && snap.checked.markedBox[6] != 'N' && snap.checked.markedBox[7] != 'N' && snap.checked.markedBox[8] != 'N') {
+                } else if (declareOnce && snap.checked.markedBox[0] != 'N' && snap.checked.markedBox[1] != 'N' && snap.checked.markedBox[2] != 'N' && snap.checked.markedBox[3] != 'N' && snap.checked.markedBox[4] != 'N' && snap.checked.markedBox[5] != 'N' && snap.checked.markedBox[6] != 'N' && snap.checked.markedBox[7] != 'N' && snap.checked.markedBox[8] != 'N') {
+                    declareOnce = false;
                     pop('Yo..Yo..!!', '', `Draw Match!!`);
                 }
                 activeBox = (markedBox[activeBox] == 'N') ? activeBox : 9;
@@ -101,6 +102,16 @@ $(document).ready(function () {
             var matched = false;
             win = 'N';
             subMaize = maize[e];
+            filled = true;
+            for (var i = 0; i <= 8; i++) {
+                if (subMaize[i] != 'O' && subMaize[i] != 'X') {
+                    filled = false;
+                }
+            }
+            if (filled) {
+                win = 'V';
+                matched = true;
+            }
             for (var i = 0; i <= 6; i += 3) {
                 if (subMaize[i] == subMaize[i + 1] && subMaize[i] == subMaize[i + 2] && subMaize[i] != 'N') {
                     win = subMaize[i];
