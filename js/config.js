@@ -1,10 +1,9 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyAbW5ELJwoFbTSm7DTzya9_RgZdu13hYcc",
-  authDomain: "tictactoe-1fa8c.firebaseapp.com",
-  databaseURL: "https://tictactoe-1fa8c.firebaseio.com",
-  projectId: "tictactoe-1fa8c",
-  storageBucket: "tictactoe-1fa8c.appspot.com",
-  messagingSenderId: "624256013043",
-  appId: "1:624256013043:web:4cb7e7672f75d1a4241d86"
+  apiKey: "AIzaSyBHuWoWn2-By-f9Noys4u65t89FEzWaFgE",
+  authDomain: "argamess.firebaseapp.com",
+  projectId: "argamess",
+  databaseURL:
+    "https://argamess-default-rtdb.asia-southeast1.firebasedatabase.app",
+  appId: "1:252595368743:web:0ba2ace9538bfd526aef02",
 };
 firebase.initializeApp(firebaseConfig);
