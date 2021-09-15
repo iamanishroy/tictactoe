@@ -24,13 +24,13 @@ function checkNameAndCreateUltimate() {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     firebase
       .database()
-      .ref("rooms/" + result)
+      .ref("tictactoe/rooms/" + result)
       .once("value", function (snapshot) {
         if (!snapshot.val()) {
           if (type === 1) {
             firebase
               .database()
-              .ref("rooms/" + result)
+              .ref("tictactoe/rooms/" + result)
               .set({
                 roomId: result,
                 type: 1,
@@ -59,7 +59,7 @@ function checkNameAndCreateUltimate() {
           } else if (type === 2) {
             firebase
               .database()
-              .ref("rooms/" + result)
+              .ref("tictactoe/rooms/" + result)
               .set({
                 roomId: result,
                 type: 2,
@@ -88,7 +88,7 @@ function checkRoomAndEnter() {
     firebase
       .database()
       .ref(
-        "rooms/" +
+        "tictactoe/rooms/" +
           $("#paperInputs2").val().trim().replace("-", "").toUpperCase()
       )
       .once("value", function (snapshot) {
